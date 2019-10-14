@@ -10,10 +10,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="./css/style.css"
-    />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <script></script>
   <body>
@@ -26,24 +23,39 @@
       <h1 class="welcome">Welcome to My Horse Quiz!</h1>
       <!-- view highscores button -->
       <!-- timer -->
-    </div>
-    <div id="start" class="start-quiz">Start Quiz!</div>
+      <div id="start" class="start-quiz">Start Quiz!</div>
 
       <div id="startQuiz" style="display: none">
         <!-- question -->
         <div id="question" class="question"></div>
         <!-- choices -->
         <div id="choices">
-          <div class="choice" id="answerA" onclick="checkAnswer('answerA')"></div>
-          <div class="choice" id="answerB" onclick="checkAnswer('answerB')"></div>
-          <div class="choice" id="answerC" onclick="checkAnswer('answerC')"></div>
-          <div class="choice" id="answerD" onclick="checkAnswer('answerD')"></div>
+          <div
+            class="choice"
+            id="answerA"
+            onclick="checkAnswer('answerA')"
+          ></div>
+          <div
+            class="choice"
+            id="answerB"
+            onclick="checkAnswer('answerB')"
+          ></div>
+          <div
+            class="choice"
+            id="answerC"
+            onclick="checkAnswer('answerC')"
+          ></div>
+          <div
+            class="choice"
+            id="answerD"
+            onclick="checkAnswer('answerD')"
+          ></div>
         </div>
       </div>
-    <!-- next question -->
-    <button id="questionBtn">Next Question</button>
-    <!-- show final score -->
-    <div style="display: none" id="finalScore">
+      <!-- next question -->
+      <!-- <button id="questionBtn">Next Question</button> -->
+      <!-- show final score -->
+      <div style="display: none" id="finalScore">
         <div>Final Score</div>
         <div id="userScore"></div>
         <!-- form to submit score -->
@@ -51,6 +63,13 @@
           <input placeholder="Your Name" id="name" />
           <button id="submitScoreBtn">Submit Score</button>
         </form>
+      </div>
+      <div id="highScores2" class="highScores2" style="display: none">
+        <div class="highScores3">High Scores</div>
+        <div id="name-Score" class="name-Score"></div>
+      </div>
+      <div id="home" class="home" style="display: none">Home</div>
+    </div>
   </body>
   <!-- database -->
   <script src="./javascript/questions.js"></script>

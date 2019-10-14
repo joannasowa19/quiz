@@ -5,6 +5,7 @@ var questionDiv = document.getElementById("question");
 var choicesDiv = document.getElementById("choices");
 var timerDiv = document.getElementById("timer");
 var questionBtn = document.getElementById("questionBtn");
+var highScores = document.getElementById("highScores");
 var answerA = document.getElementById("answerA");
 var answerB = document.getElementById("answerB");
 var answerC = document.getElementById("answerC");
@@ -12,22 +13,18 @@ var answerD = document.getElementById("answerD");
 var finalScore = document.getElementById("finalScore");
 var userName = document.getElementById("userName");
 var submitScoreBtn = document.getElementById("submitScoreBtn");
+var highScores2 = document.getElementById("highScores2");
+var nameScore = document.getElementById("name-Score");
+var home = document.getElementById("home");
 var startQuestion = 0;
 var i = 0;
+var user = [];
 var finalQuestion = questions.length - 1;
 var score = 0;
 var userScore = document.getElementById("userScore");
 var secondsLeft = 15;
 var countDown = secondsLeft;
 var timer = 0;
-
-// start quiz //
-function startQuiz() {
-  start.style.display = "none";
-  showQuestion();
-  quiz.style.display = "block"; // need to start timer after //
-  startTimer();
-}
 
 // need to show first question //
 function startQuestions() {
@@ -37,6 +34,21 @@ function startQuestions() {
   answerB.innerHTML = q.answerB;
   answerC.innerHTML = q.answerC;
   answerD.textContent = q.answerD;
+}
+
+// start quiz //
+function startQuiz() {
+  start.style.display = "none";
+  showQuestion();
+  startQuiz.style.display = "block"; // need to start timer after //
+  startTimer();
+}
+
+// show score - need to hide quiz first //
+function showScore() {
+  quiz.style.display = "none";
+  finalScore.style.display = "block";
+  userScore.textContent = score + secondsLeft;
 }
 
 // helpers //
@@ -55,11 +67,37 @@ function renderChoices(index) {
   }
 }
 
-// show score - need to hide quiz first //
-function showScore() {
-  quiz.style.display = "none";
-  finalScore.style.display = "block";
-  userScore.textContent = score + secondsLeft;
+function renderScore() {
+  nameScore.innerHTML = "";
+  var lastUser = JSON.parse(localStorage.getItem("storage"));
+  for (var i = 0; i < lastUser.length; i++) {
+    var name = user[i].names;
+    var score = user[i].savedScores;
+    var div = document.createElement("div");
+    div.textContent = name + "   " + score;
+    div.setAttribute("data-index", i);
+    nameScore.appendChild(div);
+  }
+  if ((lastUser = null)) {
+    lastUser = user;
+  }
+}
+
+function scoresPage() {
+  start.style.display = "none";
+  startQuiz.style.display = "none";
+  finalScore.style.display = "none";
+  highScores.style.display = "block";
+  home.style.display = "block";
+  clearInterval(timer);
+}
+
+function homePage() {
+  start.style.display = "block";
+  startQuiz.style.display = "none";
+  finalScore.style.display = "none";
+  home.style.display = "none";
+  highScores.style.display = "none";
 }
 
 // storage //
@@ -122,12 +160,9 @@ function init() {
 
 // events //
 start.addEventListener("click", startQuiz);
-questionBtn.addEventListener("click", function() {
-  startQuestion++;
-  // call render question //
-  questionDiv.innerHTML = renderQuestion(startQuestion);
-  renderChoices(startQuestion);
-});
+submitScoreBtn.addEventListener("click", storeScore);
+highScores.addEventListener("click", scoresPage);
+home.addEventListener("click", homePage);
 
 // init //
 questionDiv.innerHTML = renderQuestion(startQuestion);
