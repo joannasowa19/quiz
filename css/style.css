@@ -1,0 +1,44 @@
+.container {
+  margin: 20px auto;
+  background-color: rgb(233, 233, 233);
+  height: 35vh;
+  width: 80vw;
+  border-radius: 5px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding: 2% 0%;
+}
+
+.highscores {
+  color: rgb(95, 136, 160);
+  font-weight: bold;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+}
+
+.start-quiz {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(95, 136, 160);
+}
+
+.timer {
+  color: rgb(95, 136, 160);
+  font-weight: bold;
+}
+
+.welcome {
+  font-size: 3rem;
+  text-align: center;
+  color: cadetblue;
+}

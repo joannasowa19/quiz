@@ -10,30 +10,34 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="./css/style.css"
+    />
   </head>
   <script></script>
   <body>
     <!-- header -->
-    <div class="jumbotron">
+    <div id="container" class="container">
       <div id="header" class="header">
-        <div id="highScores">View High Scores</div>
-        <div id="timer">Timer</div>
+        <div id="highScores" class="highscores">View High Scores</div>
+        <div id="timer" class="timer">Timer</div>
       </div>
-      <h1 class="text-center">Welcome to My Horse Quiz!</h1>
+      <h1 class="welcome">Welcome to My Horse Quiz!</h1>
       <!-- view highscores button -->
       <!-- timer -->
     </div>
-    <div id="start">Start Quiz!</div>
+    <div id="start" class="start-quiz">Start Quiz!</div>
 
-      <div id="quiz" style="display: none">
+      <div id="startQuiz" style="display: none">
         <!-- question -->
         <div id="question" class="question"></div>
         <!-- choices -->
         <div id="choices">
-          <div class="choice" id="A" onclick="checkAnswer('A')"></div>
-          <div class="choice" id="B" onclick="checkAnswer('B')"></div>
-          <div class="choice" id="C" onclick="checkAnswer('C')"></div>
-          <div class="choice" id="D" onclick="checkAnswer('D')"></div>
+          <div class="choice" id="answerA" onclick="checkAnswer('answerA')"></div>
+          <div class="choice" id="answerB" onclick="checkAnswer('answerB')"></div>
+          <div class="choice" id="answerC" onclick="checkAnswer('answerC')"></div>
+          <div class="choice" id="answerD" onclick="checkAnswer('answerD')"></div>
         </div>
       </div>
     <!-- next question -->
@@ -43,7 +47,7 @@
         <div>Final Score</div>
         <div id="userScore"></div>
         <!-- form to submit score -->
-        <form>
+        <form class="scoreboard">
           <input placeholder="Your Name" id="name" />
           <button id="submitScoreBtn">Submit Score</button>
         </form>

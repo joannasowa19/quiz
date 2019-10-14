@@ -1,35 +1,42 @@
-// global variables //
+// global variables (might not need all of these) //
 var start = document.getElementById("start");
+var startQuiz = document.getElementById("startQuiz");
 var questionDiv = document.getElementById("question");
 var choicesDiv = document.getElementById("choices");
+var timerDiv = document.getElementById("timer");
 var questionBtn = document.getElementById("questionBtn");
-var choiceA = document.getElementById("A");
-var choiceB = document.getElementById("B");
-var choiceC = document.getElementById("C");
-var choiceD = document.getElementById("D");
+var answerA = document.getElementById("answerA");
+var answerB = document.getElementById("answerB");
+var answerC = document.getElementById("answerC");
+var answerD = document.getElementById("answerD");
 var finalScore = document.getElementById("finalScore");
 var userName = document.getElementById("userName");
 var submitScoreBtn = document.getElementById("submitScoreBtn");
 var startQuestion = 0;
+var i = 0;
+var finalQuestion = questions.length - 1;
 var score = 0;
 var userScore = document.getElementById("userScore");
 var secondsLeft = 15;
 var countDown = secondsLeft;
+var timer = 0;
 
 // start quiz //
 function startQuiz() {
   start.style.display = "none";
   showQuestion();
   quiz.style.display = "block"; // need to start timer after //
+  startTimer();
 }
 
+// need to show first question //
 function startQuestions() {
-  var q = questions[currentQuestion];
-  question.innerHTML = "<p>" + q.question + "</p>";
-  choiceA.innerHTML = q.choiceA;
-  choiceB.innerHTML = q.choiceB;
-  choiceC.innerHTML = q.choiceC;
-  choiceD.textContent = q.choiceD;
+  var q = questions[i];
+  questionDiv.innerHTML = "<p>" + q.questionDiv + "</p>";
+  answerA.innerHTML = q.answerA;
+  answerB.innerHTML = q.answerB;
+  answerC.innerHTML = q.answerC;
+  answerD.textContent = q.answerD;
 }
 
 // helpers //
@@ -37,6 +44,7 @@ function startQuestions() {
 function renderQuestion(index) {
   return questions[index].title;
 }
+
 // another helper - takes in index, uses this index to return the choices from the database //
 function renderChoices(index) {
   choicesDiv.innerHTML = "";
@@ -47,45 +55,52 @@ function renderChoices(index) {
   }
 }
 
-// timer //
-function startTimer() {
-  var countDown = setInterval(function() {
-    timer.textContent = "Time Left: " + secondsLeft;
-    if (secondsLeft > 0) {
-      secondsLeft--;
-    } else {
-      clearInterval(countDown);
-      completeQuiz();
-    }
-  }, 1000);
-}
-
-// show score //
+// show score - need to hide quiz first //
 function showScore() {
   quiz.style.display = "none";
   finalScore.style.display = "block";
-  yourScore.textContent = score;
+  userScore.textContent = score + secondsLeft;
 }
 
 // storage //
 function storeScore(event) {
   event.preventDefault();
   var user = {
-    name: nameImput.value,
-    savedScore: score
+    name: userName.value,
+    savedScore: score + secondsLeft
   };
 
   localStorage.setItem("storage", JSON.stingify(user));
 }
 
+// timer //
+function startTimer() {
+  timer = setInterval(function() {
+    timerDiv.textContent = secondsLeft;
+    secondsLeft--;
+    if (secondsLeft <= 0) {
+      timerDiv.textContent = "";
+      clearInterval(timer);
+    }
+  }, 1000);
+}
+
 // check answer //
 function checkAnswer(answer) {
   if (answer === questions[i].correct) {
-    console.log(++score);
+    score += 10;
   }
   if (answer !== questions[i].correct) {
-    // decrease 15 seconds of time
+    // decrease 15 seconds of time //
     timeLeft -= 15;
+    score -= 0;
+  }
+  if (i < finalQuestion) {
+    i++;
+    showQuestion();
+  } else {
+    clearInterval(timeInterval);
+    showScore();
   }
 }
 
@@ -99,7 +114,14 @@ function completeQuiz() {
   score.innerHTML += "<p>" + finalScore + "</p>";
 }
 
+function init() {
+  start.style.display = "block";
+  startQuiz.style.display = "none";
+  finalScore.style.display = "none";
+}
+
 // events //
+start.addEventListener("click", startQuiz);
 questionBtn.addEventListener("click", function() {
   startQuestion++;
   // call render question //
@@ -110,3 +132,4 @@ questionBtn.addEventListener("click", function() {
 // init //
 questionDiv.innerHTML = renderQuestion(startQuestion);
 renderChoices(0);
+init();
