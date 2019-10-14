@@ -1,9 +1,9 @@
 // array of questions (question-string, choices-array, answer-string, key-number) //
 var questions = [
   {
-    title: "What is the hair line going down a horse's neck called?",
-    choices: ["bangs", "mane", "hair", "forlock"],
-    answer: "mane"
+    title: "Which is a species of wild horse?",
+    choices: ["Thoroughbred", "Mustang", "Fresian", "Arabian"],
+    answer: "Mustang"
   },
   {
     title: "Which is not a style of horse-back riding?",
@@ -11,18 +11,23 @@ var questions = [
     answer: "Backwards"
   },
   {
-    title: "Another question",
-    choices: ["English", "Saddle Seat", "Western", "Backwards"],
-    answer: "Backwards"
+    title: "How can you tell a horse is listening to you?",
+    choices: [
+      "From their ears moving",
+      "They start to smile",
+      "When they respond back",
+      "They start to swish their tail"
+    ],
+    answer: "From their ears moving"
   },
   {
-    title: "How many fucks do i not give",
-    choices: ["English", "Saddle Seat", "Western", "Backwards"],
-    answer: "Backwards"
+    title: "What is a young female horse called?",
+    choices: ["Foal", "Colt", "Mare", "Filly"],
+    answer: "Filly"
   },
   {
-    title: "one more question",
-    choices: ["English", "Saddle Seat", "Western", "Backwards"],
-    answer: "Backwards"
+    title: "Which is not a natural horse gait",
+    choices: ["Canter", "Walk", "Trot", "Gallop"],
+    answer: "Trot"
   }
 ];

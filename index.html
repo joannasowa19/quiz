@@ -15,18 +15,38 @@
   <body>
     <!-- header -->
     <div class="jumbotron">
+      <div id="header" class="header">
+        <div id="highScores">View High Scores</div>
+        <div id="timer">Timer</div>
+      </div>
       <h1 class="text-center">Welcome to My Horse Quiz!</h1>
       <!-- view highscores button -->
       <!-- timer -->
     </div>
-    <!-- question -->
-    <div id="question">replace this with db</div>
+    <div id="start">Start Quiz!</div>
 
-    <!-- choices -->
-    <div id="choices">replace with choices</div>
-
+      <div id="quiz" style="display: none">
+        <!-- question -->
+        <div id="question" class="question"></div>
+        <!-- choices -->
+        <div id="choices">
+          <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+          <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+          <div class="choice" id="C" onclick="checkAnswer('C')"></div>
+          <div class="choice" id="D" onclick="checkAnswer('D')"></div>
+        </div>
+      </div>
     <!-- next question -->
     <button id="questionBtn">Next Question</button>
+    <!-- show final score -->
+    <div style="display: none" id="finalScore">
+        <div>Final Score</div>
+        <div id="userScore"></div>
+        <!-- form to submit score -->
+        <form>
+          <input placeholder="Your Name" id="name" />
+          <button id="submitScoreBtn">Submit Score</button>
+        </form>
   </body>
   <!-- database -->
   <script src="./javascript/questions.js"></script>
