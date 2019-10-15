@@ -1,3 +1,16 @@
+.choice {
+  display: inline-block;
+  border: 2px solid cadetblue;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.choice:hover {
+  color: cadetblue;
+  border: 2px solid white;
+}
+
 .container {
   margin: 20px auto;
   background-color: rgb(233, 233, 233);
@@ -31,9 +44,33 @@
 
 .start-quiz {
   font-size: 1.5rem;
+  width: 20%;
   text-align: center;
   font-weight: bold;
   color: rgb(95, 136, 160);
+  border: 2px solid cadetblue;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.start-quiz:hover {
+  color: cadetblue;
+  border: 2px solid white;
+}
+
+.submitScoreBtn {
+  font-weight: bold;
+  color: rgb(95, 136, 160);
+  border: 2px solid cadetblue;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.submitScoreBtn:hover {
+  color: cadetblue;
+  border: 2px solid white;
 }
 
 .timer {

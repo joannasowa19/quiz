@@ -131,7 +131,7 @@ function storeScore(event) {
     savedScore: score + secondsLeft
   };
 
-  localStorage.setItem("storage", JSON.stingify(user));
+  localStorage.setItem("storage", JSON.stringify(user));
 }
 
 function renderScore() {
