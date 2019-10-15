@@ -1,17 +1,17 @@
 // array of questions (question-string, choices-array, answer-string, key-number) //
 var questions = [
   {
-    title: "Which is a species of wild horse?",
+    prompt: "Which is a species of wild horse?",
     choices: ["Thoroughbred", "Mustang", "Fresian", "Arabian"],
     answer: "Mustang"
   },
   {
-    title: "Which is not a style of horse-back riding?",
+    prompt: "Which is not a style of horse-back riding?",
     choices: ["English", "Saddle Seat", "Western", "Backwards"],
     answer: "Backwards"
   },
   {
-    title: "How can you tell a horse is listening to you?",
+    prompt: "How can you tell a horse is listening to you?",
     choices: [
       "From their ears moving",
       "They start to smile",
@@ -21,12 +21,12 @@ var questions = [
     answer: "From their ears moving"
   },
   {
-    title: "What is a young female horse called?",
+    prompt: "What is a young female horse called?",
     choices: ["Foal", "Colt", "Mare", "Filly"],
     answer: "Filly"
   },
   {
-    title: "Which is not a natural horse gait",
+    prompt: "Which is not a natural horse gait",
     choices: ["Canter", "Walk", "Trot", "Gallop"],
     answer: "Trot"
   }
@@ -41,10 +41,10 @@ var startDiv = document.getElementById("start");
 var startQuiz = document.getElementById("startQuiz");
 var questionDiv = document.getElementById("question");
 var choicesDiv = document.getElementById("choices");
-var answerA = document.getElementById("answerA");
-var answerB = document.getElementById("answerB");
-var answerC = document.getElementById("answerC");
-var answerD = document.getElementById("answerD");
+var choiceA = document.getElementById("choiceA");
+var choiceB = document.getElementById("choiceB");
+var choiceC = document.getElementById("choiceC");
+var choiceD = document.getElementById("choiceD");
 var finalScore = document.getElementById("finalScore");
 var userScore = document.getElementById("userScore");
 var nameInput = document.getElementById("name");
@@ -62,6 +62,20 @@ var score = 0;
 var countDown = secondsLeft;
 var secondsLeft = 30;
 var timer = 0;
+
+// helpers //
+function renderQuestion(index) {
+  return questionDiv[currentQuestion].prompt;
+}
+
+function askQuestion() {
+  var q = questions[currentQuestion];
+  questionDiv.innerHTML = "<div>" + q.prompt + "</div>";
+  choiceA.innerHTML = "<div>" + q.choices[0] + "</div>";
+  choiceB.innerHTML = "<div>" + q.choices[1] + "</div>";
+  choiceC.innerHTML = "<div>" + q.choices[2] + "</div>";
+  choiceD.innerHTML = "<div>" + q.choices[3] + "</div>";
+}
 
 // start quiz //
 function beginQuiz() {
@@ -81,29 +95,6 @@ function startTimer() {
       clearInterval(timer);
     }
   }, 1000);
-}
-
-// helpers //
-function renderQuestion(index) {
-  return questions[currentQuestion].title;
-}
-
-function renderChoices(index) {
-  choicesDiv.innerHTML = "";
-  for (i = 0; i < questions[index].questionDiv.length; i++) {
-    var choiceBtn = document.createElement("button");
-    choiceBtn.textContent = questions[index].choicesDiv[i];
-    choicesDiv.appendChild(choiceBtn);
-  }
-}
-
-function askQuestion() {
-  var q = questions[currentQuestion];
-  questionDiv.innerHTML = "<div>" + q.questionDiv + "</div>";
-  answerA.innerHTML = q.answerA;
-  answerB.innerHTML = q.answerB;
-  answerC.innerHTML = q.answerC;
-  answerD.textContent = q.answerD;
 }
 
 function checkAnswer(answer) {
@@ -159,15 +150,33 @@ function renderScore() {
   }
 }
 
+function scoresPage() {
+  startDiv.style.display = "none";
+  startQuiz.style.display = "none";
+  finalScore.style.display = "none";
+  highScores3.style.display = "block";
+  //stop clock //
+  clearInterval(timer);
+  // send finished scores to highscores page //
+  renderScore();
+}
+
 function init() {
   startDiv.style.display = "block";
   startQuiz.style.display = "none";
   finalScore.style.display = "none";
+
+  var lastUser = JSON.parse(localStorage.getItem("storage"));
+
+  if (lastUser !== null) {
+    user = lastUser;
+  }
 }
 
 // events //
 startDiv.addEventListener("click", beginQuiz);
-choicesDiv.addEventListener("click", renderChoices);
+submitScoreBtn.addEventListener("click", storeScore);
+highScoresDiv.addEventListener("click", scoresPage);
 
 // init //
 init();

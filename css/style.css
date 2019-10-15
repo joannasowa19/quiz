@@ -20,6 +20,10 @@
   font-weight: bold;
 }
 
+.question {
+  font-weight: bold;
+}
+
 .scoreboard {
   display: flex;
   justify-content: center;
